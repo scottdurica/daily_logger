@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        android:columnCount="2">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_row="0"
+            android:gravity="right"
+            android:text="date will go here"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/tv_address_main"
+            android:layout_column="0"
+            android:layout_gravity="left|center"
+            android:layout_row="1"
+            android:text="Address"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_address_secondary"
+            android:layout_column="0"
+            android:layout_gravity = "left|center"
+            android:layout_row="2"
+            android:text="Apt_Unit"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_address_secondary"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="fill_horizontal|top"
+            android:layout_row="2"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/tv_hours"
+            android:layout_column="0"
+            android:layout_gravity="left|center"
+            android:layout_row="3"
+            android:text="Labor-Hours"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_hours"
+            android:layout_column="1"
+            android:layout_gravity="right|top"
+            android:layout_row="3"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tv_labor_rate"
+            android:layout_column="0"
+            android:layout_gravity="left|center"
+            android:layout_row="4"
+            android:text="Labor Rate"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_labor_rate"
+            android:layout_column="1"
+            android:layout_gravity="right|top"
+            android:layout_row="4"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+        
+        <TextView
+            android:id="@+id/tv_material_cost"
+            android:layout_column="0"
+            android:layout_gravity="left|center"
+            android:layout_row="5"
+            android:text="Material Cost"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_material_cost"
+            android:layout_column="1"
+            android:layout_gravity="right|top"
+            android:layout_row="5"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+        
+        <TextView
+            android:id="@+id/tv_material_markup"
+            android:layout_column="0"
+            android:layout_gravity="left|center"
+            android:layout_row="6"
+            android:text="Material Markup"
+            android:paddingRight="25dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_material_markup"
+            android:layout_column="1"
+            android:layout_gravity="right|top"
+            android:layout_row="6"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tv_worker_name"
+            android:layout_column="0"
+            android:layout_gravity="left|center"
+            android:layout_row="7"
+            android:text="Worker Name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_worker_name"
+            android:layout_column="1"
+            android:layout_gravity="right|top"
+            android:layout_row="7"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            
+            android:layout_column="0"
+            android:layout_gravity="left|center"
+            android:layout_row="9"
+            android:text="Total"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <TextView
+        
+            android:id="@+id/tv_total"
+            android:layout_column="1"
+            android:layout_gravity="left|center_vertical"
+            android:layout_row="9"
+            android:text="Medium Text"
+            android:layout_marginTop = "20dp"
+            android:layout_marginBottom = "20dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/et_address_main"
+            android:layout_column="1"
+            android:layout_gravity="left|top"
+            android:layout_row="1"
+            android:ems="10" />
+        
+        <Button
+            android:id="@+id/b_enter_data_to_db"
+            android:layout_column="1"
+            android:layout_gravity="left|center_vertical"
+            android:layout_row="10"
+            android:layout_marginTop = "25dp"
+            android:text="Enter Data" />
+
+    </GridLayout>
+
+</RelativeLayout>
