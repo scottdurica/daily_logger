@@ -33,9 +33,9 @@ public class DataViewScreen extends ListActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		List<Date> listForView = getDates();
+		List<String> listForView = getDates();
 		
-		setListAdapter(new ArrayAdapter<Date>(this, android.R.layout.simple_list_item_1,listForView));
+		setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,listForView));
 		
 		ListView listView = getListView();
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -49,7 +49,7 @@ public class DataViewScreen extends ListActivity{
 		
 	}
 
-	private List<Date> getDates(){
+	private List<String> getDates(){
 		DbHandler db = new DbHandler(this);
 		entryList= db.getAllEntries();
 		newList = new ArrayList<Date>();
@@ -73,7 +73,12 @@ public class DataViewScreen extends ListActivity{
 			}
 		}
 		Collections.sort(newList);
-		return newList;
+		List<String> stringList = new ArrayList<String>();
+		for(Date d: newList){
+			String s = sdf.format(d);
+			stringList.add(s);
+		}
+		return stringList;
 	}
 	
 }
