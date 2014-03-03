@@ -1,13 +1,16 @@
 package com.emRoXRIPRAP.logger;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import com.emRoXRIPRAP.logger.DBContract.DataEntry;
 
 public class DbHandler extends SQLiteOpenHelper {
@@ -81,6 +84,39 @@ public class DbHandler extends SQLiteOpenHelper {
 								cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9));
 		entry.setId(cursor.getInt(0));
 		return entry;
+	}
+	public List<Entry>getEntriesForDate(String date){
+		SQLiteDatabase db = this.getReadableDatabase();
+		List<Entry> list = new ArrayList<Entry>();
+		
+		Cursor cursor = db.query(DataEntry.TABLE_NAME, new String[] {DataEntry.COLUMN_NAME_DATE,
+																	DataEntry.COLUMN_NAME_ADDRESS_MAIN,
+																	DataEntry.COLUMN_NAME_ADDRESS_SECONDARY,
+																	DataEntry.COLUMN_NAME_LABOR_HOURS,
+																	DataEntry.COLUMN_NAME_LABOR_RATE,
+																	DataEntry.COLUMN_NAME_MATERIAL_COST,
+																	DataEntry.COLUMN_NAME_MATERIAL_MARKUP,
+																	DataEntry.COLUMN_NAME_WORKER_NAME,
+																	DataEntry.COLUMN_NAME_TOTAL,
+																	DataEntry.COLUMN_NAME_ENTRY_ID
+																	}, 
+																	DataEntry.COLUMN_NAME_DATE + "=?",
+																	new String[] {String.valueOf(date) },
+																	null,null,null,null
+																	);
+		
+		if(cursor.moveToFirst()){
+			do{
+				Entry entry = new Entry(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
+						cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8));
+				entry.setId(cursor.getInt(9));
+				list.add(entry);
+			}while(cursor.moveToNext());
+		}
+		
+		
+	
+		return list;
 	}
 	
 	public List<Entry> getAllEntries(){
