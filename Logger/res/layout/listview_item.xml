@@ -3,89 +3,87 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+
+
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" >
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/i_li_entered_or_not"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/entered_status_no"
+            android:maxWidth="32dip"
+            android:maxHeight="32dip" />
 
         <TextView
             android:id="@+id/tv_li_address_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="137 ski mobile trail"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tv_li_apt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="unit 3"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" >
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hours/Rate/Total"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_li_address_main"
+            android:layout_marginLeft="20dp"
+            android:text="Hours"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/tv_li_hours_rate_total"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:layout_below="@+id/tv_li_address_main"
+            android:layout_marginLeft="35dp"
+            android:layout_toRightOf="@+id/textView2"
             android:text="3.25/35/105.75"
             android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" >
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Material/Markup/Total"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_below="@+id/textView2"
+            android:text="Mats."
             android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-                <TextView
+
+        <TextView
             android:id="@+id/tv_li_material_markup_total"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:layout_alignLeft="@+id/tv_li_hours_rate_total"
+            android:layout_below="@+id/tv_li_hours_rate_total"
             android:text="55.00/.10/105.75"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_below="@+id/textView3"
+            android:text="Total"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/tv_li_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_li_material_markup_total"
+            android:layout_below="@+id/tv_li_material_markup_total"
             android:text="$255.85"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

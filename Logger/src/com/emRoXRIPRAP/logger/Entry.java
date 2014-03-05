@@ -1,7 +1,5 @@
 package com.emRoXRIPRAP.logger;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 public class Entry {
 
@@ -9,31 +7,29 @@ public class Entry {
 	private int id;
 	private String date;
 	private String addressMain;
-	private String addressSecondary;
 	private String laborHours;
 	private String laborRate;
 	private String materialCost;
 	private String materialMarkup;
-	private String workerName;
 	private String total;
+	private String isEntered;
 
 	//constructor
 	public Entry(){
 		
 	}
 	//constructor
-	public Entry(String date, String addressMain, String addressSecondary, String laborHours, 
-					String laborRate, String materialCost, String materialMarkup, String workerName, String total){
+	public Entry(String date, String isEntered, String addressMain, String laborHours, 
+					String laborRate, String materialCost, String materialMarkup,String total){
 //		this.id= System.currentTimeMillis() + (long)Math.random();
 //		Log.d("LOG LOG LOG entry constructor() ", "ID: " + this.id);
 		this.date = date;
+		this.isEntered = isEntered;
 		this.addressMain = addressMain;
-		this.addressSecondary = addressSecondary;
 		this.laborHours = laborHours;
 		this.laborRate = laborRate;
 		this.materialCost = materialCost;
 		this.materialMarkup = materialMarkup;
-		this.workerName = workerName;
 		this.total = total;
 		
 		return;
@@ -45,11 +41,11 @@ public class Entry {
 	public String getDate() {
 		return date;
 	}
+	public String getIsEntered(){
+		return isEntered;
+	}
 	public String getAddressMain() {
 		return addressMain;
-	}
-	public String getAddressSecondary() {
-		return addressSecondary;
 	}
 	public String getLaborHours() {
 		return laborHours;
@@ -63,9 +59,6 @@ public class Entry {
 	public String getMaterialMarkup() {
 		return materialMarkup;
 	}
-	public String getWorkerName() {
-		return workerName;
-	}
 	public String getTotal() {
 		return total;
 	}
@@ -77,11 +70,11 @@ public class Entry {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	public void setIsEntered(String isEntered){
+		this.isEntered = isEntered;
+	}
 	public void setAddressMain(String addressMain) {
 		this.addressMain = addressMain;
-	}
-	public void setAddressSecondary(String addressSecondary) {
-		this.addressSecondary = addressSecondary;
 	}
 	public void setLaborHours(String laborHours) {
 		this.laborHours = laborHours;
@@ -94,9 +87,6 @@ public class Entry {
 	}
 	public void setMaterialMarkup(String materialMarkup) {
 		this.materialMarkup = materialMarkup;
-	}
-	public void setWorkerName(String workerName) {
-		this.workerName = workerName;
 	}
 	public void setTotal(String total) {
 		this.total = total;

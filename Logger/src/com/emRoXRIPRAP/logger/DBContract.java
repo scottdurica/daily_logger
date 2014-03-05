@@ -19,24 +19,22 @@ public final class DBContract {
         public static String COLUMN_NAME_ENTRY_ID = "id";
         public static final String COLUMN_NAME_DATE = "date";
         public static final String COLUMN_NAME_ADDRESS_MAIN = "address_main";
-        public static final String COLUMN_NAME_ADDRESS_SECONDARY = "address_secondary";
+        public static final String COLUMN_NAME_IS_ENTERED = "is_entered";
         public static final String COLUMN_NAME_LABOR_HOURS = "labor_hours";
         public static final String COLUMN_NAME_LABOR_RATE = "labor_rate";
         public static final String COLUMN_NAME_MATERIAL_COST = "material_cost";
         public static final String COLUMN_NAME_MATERIAL_MARKUP = "material_markup";
-        public static final String COLUMN_NAME_WORKER_NAME = "worker_name";
         public static final String COLUMN_NAME_TOTAL = "total";
 
 		public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 								+ COLUMN_NAME_ENTRY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," 
                 								+ COLUMN_NAME_DATE + " TEXT,"
+                								+ COLUMN_NAME_IS_ENTERED + " TEXT,"
                 								+ COLUMN_NAME_ADDRESS_MAIN + " TEXT," 
-                								+ COLUMN_NAME_ADDRESS_SECONDARY + " TEXT,"
                 								+ COLUMN_NAME_LABOR_HOURS + " TEXT,"
                 								+ COLUMN_NAME_LABOR_RATE + " TEXT," 
                 								+ COLUMN_NAME_MATERIAL_COST + " TEXT,"
                 								+ COLUMN_NAME_MATERIAL_MARKUP + " TEXT," 
-                								+ COLUMN_NAME_WORKER_NAME + " TEXT,"
                 								+ COLUMN_NAME_TOTAL + " TEXT"
                 								+ ")";
 	}

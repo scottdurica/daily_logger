@@ -1,6 +1,5 @@
 package com.emRoXRIPRAP.logger.screens;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,28 +41,10 @@ public class DataViewScreen extends ListActivity{
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				String dateString = ((TextView)view).getText().toString();
-				List<Entry> theList = db.getEntriesForDate(dateString);
-				
+				String dateString = ((TextView)view).getText().toString();				
 				Intent i = new Intent(DataViewScreen.this, SingleDateScreen.class);
 				i.putExtra("date", dateString);
 				startActivity(i);
-				
-//				Log.d("The value of the dateString is: ",dateString);
-//				Date d = null;
-//				try {
-//					d = sdf.parse(dateString);
-//					Log.d("The value of the d is: ","" + d);
-//				} catch (ParseException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				int counter = 0;
-//				for(Entry e: theList){
-//					counter++;
-//				}
-//			    Toast.makeText(getApplicationContext(),
-//				"The count for this date: " + counter, Toast.LENGTH_SHORT).show();
 			}
 		});
 		

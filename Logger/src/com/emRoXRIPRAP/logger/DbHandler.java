@@ -43,13 +43,12 @@ public class DbHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(DataEntry.COLUMN_NAME_DATE, entry.getDate());
+		values.put(DataEntry.COLUMN_NAME_IS_ENTERED,entry.getIsEntered());
 		values.put(DataEntry.COLUMN_NAME_ADDRESS_MAIN, entry.getAddressMain());
-		values.put(DataEntry.COLUMN_NAME_ADDRESS_SECONDARY,entry.getAddressSecondary());
 		values.put(DataEntry.COLUMN_NAME_LABOR_HOURS, entry.getLaborHours());
 		values.put(DataEntry.COLUMN_NAME_LABOR_RATE, entry.getLaborRate());
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_COST, entry.getMaterialCost());
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_MARKUP, entry.getMaterialMarkup());
-		values.put(DataEntry.COLUMN_NAME_WORKER_NAME, entry.getWorkerName());
 		values.put(DataEntry.COLUMN_NAME_TOTAL, entry.getTotal());
 		
 		long finished =db.insert(DataEntry.TABLE_NAME, null, values);
@@ -63,14 +62,14 @@ public class DbHandler extends SQLiteOpenHelper {
 	public Entry getEntry(int id){
 		SQLiteDatabase db = this.getReadableDatabase();
 		
-		Cursor cursor = db.query(DataEntry.TABLE_NAME, new String[] {String.valueOf(DataEntry.COLUMN_NAME_ENTRY_ID), 
+		Cursor cursor = db.query(DataEntry.TABLE_NAME, new String[] {String.valueOf(DataEntry.COLUMN_NAME_ENTRY_ID),
+																	DataEntry.COLUMN_NAME_DATE,
+																	DataEntry.COLUMN_NAME_IS_ENTERED,
 																	DataEntry.COLUMN_NAME_ADDRESS_MAIN,
-																	DataEntry.COLUMN_NAME_ADDRESS_SECONDARY,
 																	DataEntry.COLUMN_NAME_LABOR_HOURS,
 																	DataEntry.COLUMN_NAME_LABOR_RATE,
 																	DataEntry.COLUMN_NAME_MATERIAL_COST,
 																	DataEntry.COLUMN_NAME_MATERIAL_MARKUP,
-																	DataEntry.COLUMN_NAME_WORKER_NAME,
 																	DataEntry.COLUMN_NAME_TOTAL
 																	}, 
 																	DataEntry.COLUMN_NAME_ENTRY_ID + "=?",
@@ -81,7 +80,7 @@ public class DbHandler extends SQLiteOpenHelper {
 			cursor.moveToFirst();
 		}
 		Entry entry = new Entry(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
-								cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9));
+								cursor.getString(6),cursor.getString(7),cursor.getString(8));
 		entry.setId(cursor.getInt(0));
 		return entry;
 	}
@@ -90,13 +89,12 @@ public class DbHandler extends SQLiteOpenHelper {
 		List<Entry> list = new ArrayList<Entry>();
 		
 		Cursor cursor = db.query(DataEntry.TABLE_NAME, new String[] {DataEntry.COLUMN_NAME_DATE,
+																	DataEntry.COLUMN_NAME_IS_ENTERED,
 																	DataEntry.COLUMN_NAME_ADDRESS_MAIN,
-																	DataEntry.COLUMN_NAME_ADDRESS_SECONDARY,
 																	DataEntry.COLUMN_NAME_LABOR_HOURS,
 																	DataEntry.COLUMN_NAME_LABOR_RATE,
 																	DataEntry.COLUMN_NAME_MATERIAL_COST,
 																	DataEntry.COLUMN_NAME_MATERIAL_MARKUP,
-																	DataEntry.COLUMN_NAME_WORKER_NAME,
 																	DataEntry.COLUMN_NAME_TOTAL,
 																	DataEntry.COLUMN_NAME_ENTRY_ID
 																	}, 
@@ -108,8 +106,8 @@ public class DbHandler extends SQLiteOpenHelper {
 		if(cursor.moveToFirst()){
 			do{
 				Entry entry = new Entry(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
-						cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8));
-				entry.setId(cursor.getInt(9));
+						cursor.getString(5),cursor.getString(6),cursor.getString(7));
+				entry.setId(cursor.getInt(8));
 				list.add(entry);
 			}while(cursor.moveToNext());
 		}
@@ -137,14 +135,13 @@ int i = Integer.parseInt(lId);
 		            Entry entry = new Entry();
 		            entry.setId(i);
 		            entry.setDate(cursor.getString(cursor.getColumnIndexOrThrow(DataEntry.COLUMN_NAME_DATE)));
-		            entry.setAddressMain(cursor.getString(2));
-		            entry.setAddressSecondary(cursor.getString(3));
+		            entry.setAddressMain(cursor.getString(3));
+		            entry.setIsEntered(cursor.getString(2));
 		            entry.setLaborHours(cursor.getString(4));
 		            entry.setLaborRate(cursor.getString(5));
 		            entry.setMaterialCost(cursor.getString(6));
 		            entry.setMaterialMarkup(cursor.getString(7));
-		            entry.setWorkerName(cursor.getString(8));
-		            entry.setTotal(cursor.getString(9));
+		            entry.setTotal(cursor.getString(8));
 		            // Adding contact to list
 		            entryList.add(entry);
 		        } while (cursor.moveToNext());
@@ -159,12 +156,11 @@ int i = Integer.parseInt(lId);
 		ContentValues values = new ContentValues();
 		values.put(DataEntry.COLUMN_NAME_DATE, entry.getDate());
 		values.put(DataEntry.COLUMN_NAME_ADDRESS_MAIN, entry.getAddressMain());
-		values.put(DataEntry.COLUMN_NAME_ADDRESS_SECONDARY,entry.getAddressSecondary());
+		values.put(DataEntry.COLUMN_NAME_IS_ENTERED,entry.getIsEntered());
 		values.put(DataEntry.COLUMN_NAME_LABOR_HOURS, entry.getLaborHours());
 		values.put(DataEntry.COLUMN_NAME_LABOR_RATE, entry.getLaborRate());
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_COST, entry.getMaterialCost());
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_MARKUP, entry.getMaterialMarkup());
-		values.put(DataEntry.COLUMN_NAME_WORKER_NAME, entry.getWorkerName());
 		values.put(DataEntry.COLUMN_NAME_TOTAL, entry.getTotal());
 		
 		//updating row
