@@ -34,17 +34,6 @@ public class CustomAdapter extends ArrayAdapter<Entry>{
 		return entryList.size();
 	}
 
-	@Override
-	public Entry getItem(int position) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -57,7 +46,6 @@ public class CustomAdapter extends ArrayAdapter<Entry>{
 		TextView hours = (TextView)rowView.findViewById(R.id.tv_li_hours_rate_total);
 		TextView materials = (TextView)rowView.findViewById(R.id.tv_li_material_markup_total);
 		TextView total = (TextView)rowView.findViewById(R.id.tv_li_total);
-		Button edit = (Button)rowView.findViewById(R.id.b_li_edit);
 		
 		Entry e = entryList.get(position);
 		addressMain.setText(e.getAddressMain());

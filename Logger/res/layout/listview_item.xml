@@ -84,15 +84,7 @@
             android:text="$255.85"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/b_li_edit"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="160dp"
-            android:maxWidth="30dp"
-            android:minHeight="20dp"
-            android:text="Edit" />
+
 
     </LinearLayout>
 

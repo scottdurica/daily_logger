@@ -146,12 +146,29 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener{
 	}
 	private void enterDataToDb(Entry entry){
 		DbHandler db = new DbHandler(this);
+//		db.deleteAllEntries();
+//		testModeQuickEntryOfFieldsIntoDataBase(db);
+//		finish();
 		if(db.addEntry(entry)){
 			Toast.makeText(this, "Data Saved", Toast.LENGTH_LONG).show();
 			finish();
 		}else
 			Toast.makeText(this, "ERROR Saving Data", Toast.LENGTH_LONG).show();
 			finish();
+	}
+
+	private void testModeQuickEntryOfFieldsIntoDataBase(DbHandler db) {
+		Entry one = new Entry("Wednesday 02-12-2014","123 Main Street","Apt 3","8.0","35","12.90",".15","Scott", "120.00");
+		Entry two = new Entry("Wednesday 02-12-2014","137 Ski Mobile","Apt 1","18.0","35","120.20",".15","Scott", "120.00");
+		Entry thr = new Entry("Wednesday 02-12-2014","Settler's Green","Unit 29","5.5","35","87.25",".15","Scott", "120.00");
+		Entry fou = new Entry("Saturday 04-12-2014","19 Prospect St","Lancaster","10.25","35","360.25",".10","Scott", "120.00");
+		Entry fiv = new Entry("Wednesday 02-19-2014","185 Pine Knoll Ter","Lisbon","8.0","35","12.90",".15","Scott", "120.00");
+		db.addEntry(one);
+		db.addEntry(two);
+		db.addEntry(thr);
+		db.addEntry(fou);
+		db.addEntry(fiv);
+		
 	}
 	
 

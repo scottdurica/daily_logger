@@ -26,10 +26,6 @@ import com.emRoXRIPRAP.logger.Entry;
 
 public class DataViewScreen extends ListActivity{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	LayoutInflater inflater;
 	List<Entry> entryList;
 	List<Date> newList;
@@ -46,11 +42,12 @@ public class DataViewScreen extends ListActivity{
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-			    // When clicked, show a toast with the TextView text
 				String dateString = ((TextView)view).getText().toString();
 				List<Entry> theList = db.getEntriesForDate(dateString);
 				
 				Intent i = new Intent(DataViewScreen.this, SingleDateScreen.class);
+				i.putExtra("date", dateString);
+				startActivity(i);
 				
 //				Log.d("The value of the dateString is: ",dateString);
 //				Date d = null;
