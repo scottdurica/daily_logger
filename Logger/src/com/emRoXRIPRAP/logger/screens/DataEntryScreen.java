@@ -2,7 +2,9 @@ package com.emRoXRIPRAP.logger.screens;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -33,16 +35,32 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 	private Boolean isUpdate=false;
 	private Entry entryToUpdate;
 	private int id;
+	private boolean useLaborRatePref;
+	private boolean useMarkupRatePref;
+	private String laborRatePrefVal;
+	private String markupRatePrefVal;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.data_entry_screen);
-		
 		setupWidgets();
+		loadPrefs();
 		
 		
 	}
-
+	private void loadPrefs() {
+		SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		useLaborRatePref = myPrefs.getBoolean("auto_value_labor_rate", false);
+		useMarkupRatePref = myPrefs.getBoolean("auto_value_markup_rate", false);
+		if(useLaborRatePref && isUpdate == false){
+			laborRatePrefVal = myPrefs.getString("labor_rate_value", "");
+			etLaborRate.setText(laborRatePrefVal);
+		}
+		if(useMarkupRatePref && isUpdate == false){
+			markupRatePrefVal = myPrefs.getString("markup_rate_value", "");
+			etMaterialMarkup.setText(markupRatePrefVal);
+		}
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -68,6 +86,8 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 		etLaborRate.setOnFocusChangeListener(this);
 		etMaterialCost.setOnFocusChangeListener(this);
 		etMaterialMarkup.setOnFocusChangeListener(this);
+		
+		
 		
 		enterButton = (Button)findViewById(R.id.b_enter_data_to_db);
 		if(isUpdate){

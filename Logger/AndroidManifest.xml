@@ -22,33 +22,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.emRoXRIPRAP.logger.screens.DataEntryScreen"
-           	android:label="@string/app_name" 
-           	android:theme="@style/Theme.NoTitle">
+            android:label="@string/app_name"
+            android:theme="@style/Theme.NoTitle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.emRoXRIPRAP.logger.screens.DataViewScreen"
-            android:label="@string/app_name" 
-            android:theme="@style/Theme.NoTitle">
+            android:label="@string/app_name"
+            android:theme="@style/Theme.NoTitle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.emRoXRIPRAP.logger.screens.SingleDateScreen"
-            android:label="@string/app_name" 
-            android:theme="@style/Theme.NoTitle">
+            android:label="@string/app_name"
+            android:theme="@style/Theme.NoTitle" >
+        </activity>
+        <activity
+            android:name="com.emRoXRIPRAP.logger.screens.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

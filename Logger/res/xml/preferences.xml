@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Auto Values"
+    	android:key = "auto_values">
+    	
+    	<CheckBoxPreference
+    	    android:key="auto_value_labor_rate"
+    	    android:summary="Enables labor rate field to be auto-filled"
+    	    android:title="Enable Auto Value for Labor Rate"/>
+    	
+    	 <EditTextPreference
+            android:key="labor_rate_value"
+            android:title="Labor Rate Value"
+            android:summary="Define the labor rate value"
+            android:dialogTitle="Enter Value"
+            android:dialogMessage="Provide the rate you wish to use"  
+            android:dependency="auto_value_labor_rate" 
+            android:defaultValue="" />
+    	 
+    	 <CheckBoxPreference
+    	    android:key="auto_value_markup_rate"
+    	    android:summary="Enables markup rate field to be auto-filled"
+    	    android:title="Enable Auto Value for Markup Rate"/>
+    	
+    	 <EditTextPreference
+            android:key="markup_rate_value"
+            android:title="Markup Rate Value"
+            android:summary="Define the markup rate value"
+            android:dialogTitle="Enter Value"
+            android:dialogMessage="Provide the rate you wish to use"  
+            android:dependency="auto_value_markup_rate" 
+            android:defaultValue="" />
+   
+	</PreferenceCategory>
+	
+</PreferenceScreen>

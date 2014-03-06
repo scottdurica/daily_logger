@@ -1,26 +1,32 @@
 package com.emRoXRIPRAP.logger;
  
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.Toast;
 
-import com.emRoXRIPRAP.logger.DBContract.DataEntry;
 import com.emRoXRIPRAP.logger.screens.DataEntryScreen;
 import com.emRoXRIPRAP.logger.screens.DataViewScreen;
+import com.emRoXRIPRAP.logger.screens.SettingsActivity;
 
 public class MainActivity extends Activity implements OnClickListener, Constants{
 	
+
+
+
+
 	Button viewData;
 	Button enterData;
 	CalendarView calendar;
@@ -29,18 +35,37 @@ public class MainActivity extends Activity implements OnClickListener, Constants
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+//		loadPrefs();
 		setupWidgets();
 		
 	}
-
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case 0:
+			startActivityForResult(new Intent(this,SettingsActivity.class), 0);
+			return true;
+		}
+		return false;
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+//		getMenuInflater().inflate(R.menu.main, menu);
+//		return true;
+		menu.add(Menu.NONE, 0, 0, "Settings");
+	    return super.onCreateOptionsMenu(menu);
 	}
-	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+//		loadPrefs();
+	}
+//	private void loadPrefs() {
+//		SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+//		
+//	}
 	private void setupWidgets(){
 		
 		viewData = (Button)findViewById(R.id.b_view_data);
