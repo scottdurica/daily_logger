@@ -2,7 +2,7 @@ package com.emRoXRIPRAP.logger;
 
 import android.provider.BaseColumns;
 
-public final class DBContract {
+public final class DBContract implements Constants {
 	
 	public static final String DB_NAME = "my_logger_db";
 	public static final int DB_VERSION = 1;

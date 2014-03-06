@@ -19,7 +19,7 @@ import com.emRoXRIPRAP.logger.DBContract.DataEntry;
 import com.emRoXRIPRAP.logger.screens.DataEntryScreen;
 import com.emRoXRIPRAP.logger.screens.DataViewScreen;
 
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends Activity implements OnClickListener, Constants{
 	
 	Button viewData;
 	Button enterData;
@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				SimpleDateFormat sdf = new SimpleDateFormat("EEEE MM-dd-yyyy", Locale.US);
 				String fDate = sdf.format(calendar.getDate());
 				intent.putExtra("date", fDate);
-				//Log.d("LOGLOG", "date value is: " + fDate );
+				//Log.d(tag, "date value is: " + fDate );
 				startActivity(intent);
 				
 				//test method
@@ -82,9 +82,9 @@ public class MainActivity extends Activity implements OnClickListener{
 //		Entry one = new Entry("Jan 1", "123 Main st.","apt 1","50","35.00","187.50",".10","Scott","100");
 //		Entry two = new Entry("Jan 2", "456 Main st.","apt 2","22","35.00","152.20",".10","Jim","200");
 //		
-//		Log.d("LOG LOG LOG ENTRY id: ", "Test to push changes");
-//		Log.d("LOG LOG LOG ENTRY id: ", "" + one.getId());
-//		Log.d("LOG LOG LOG ENTRY date: ", one.getDate());
+//		Log.d(tag, "Test to push changes");
+//		Log.d(tag, "" + one.getId());
+//		Log.d(tag, one.getDate());
 //		Log.d("LOG LOG LOG ENTRY address main: ", one.getAddressMain());
 //		Log.d("LOG LOG LOG ENTRY apt-unit: ", one.getAddressSecondary());
 //		Log.d("LOG LOG LOG ENTRY labor hours: ", one.getLaborHours());
@@ -106,7 +106,7 @@ public class MainActivity extends Activity implements OnClickListener{
 //		//db.addEntry(two);
 //		
 //        // Reading all contacts
-//        Log.d("Reading: ", "Reading all contacts.."); 
+//        Log.d(tag, "Reading all contacts.."); 
 //        List<Entry> entries = db.getAllEntries();       
 //         
 //        for (Entry e : entries) {

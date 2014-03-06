@@ -14,11 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emRoXRIPRAP.logger.Constants;
 import com.emRoXRIPRAP.logger.DbHandler;
 import com.emRoXRIPRAP.logger.Entry;
 import com.emRoXRIPRAP.logger.R;
 
-public class DataEntryScreen extends Activity implements OnFocusChangeListener{
+public class DataEntryScreen extends Activity implements OnFocusChangeListener,Constants{
 
 	private TextView date;
 	private TextView tvTotal;
@@ -191,7 +192,7 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener{
 		DbHandler db = new DbHandler(this);
 		int result = db.updateEntry(entry);
 		finish();
-		Log.d("VALUW ODF RESULT IS: ",""+ result);
+//		Log.d("VALUW ODF RESULT IS: ",""+ result);
 		if(result > 0){
 			Toast.makeText(this, "Data Saved", Toast.LENGTH_LONG).show();
 

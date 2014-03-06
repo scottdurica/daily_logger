@@ -21,8 +21,7 @@ public class Entry {
 	//constructor
 	public Entry(String date, String isEntered, String addressMain, String laborHours, 
 					String laborRate, String materialCost, String materialMarkup,String total){
-//		this.id= System.currentTimeMillis() + (long)Math.random();
-//		Log.d("LOG LOG LOG entry constructor() ", "ID: " + this.id);
+
 		this.date = date;
 		this.isEntered = isEntered;
 		this.addressMain = addressMain;

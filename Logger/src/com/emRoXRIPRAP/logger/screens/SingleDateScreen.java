@@ -26,11 +26,15 @@ public class SingleDateScreen extends Activity{
 	private  List<Entry> entryList;
 	DbHandler db = new DbHandler(this);
 	private String date;
+	private Intent i;
 	@Override
 	protected void onResume() {
 
 		super.onResume();
+		date = null;
+		i = null;
 		entryList.clear();
+		setUp();
 		entryList = db.getEntriesForDate(date);
 		adapter.notifyDataSetChanged();
 	}
@@ -39,11 +43,9 @@ public class SingleDateScreen extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_date_list_screen);
-		Intent i = getIntent();
-		date = i.getStringExtra("date");
-		entryList = db.getEntriesForDate(date);
-		TextView tvDate = (TextView)findViewById(R.id.tv_sdls_date);
-		tvDate.setText(date);
+		
+		setUp();
+		
 		
 		adapter = new MyCustomAdapter();
 		listView =(ListView)findViewById(R.id.lv_sdlv_listview);
@@ -70,6 +72,14 @@ public class SingleDateScreen extends Activity{
 		});
 	}
 	
+	private void setUp() {
+		i = getIntent();
+		date = i.getStringExtra("date");
+		entryList = db.getEntriesForDate(date);
+		TextView tvDate = (TextView)findViewById(R.id.tv_sdls_date);
+		tvDate.setText(date);		
+	}
+
 	private class MyCustomAdapter extends ArrayAdapter<Entry>{
 		
 
@@ -100,7 +110,7 @@ public class SingleDateScreen extends Activity{
 			
 			Entry e = entryList.get(position);
 			addressMain.setText(e.getAddressMain());
-			Log.d("VALUE OF THE CHECKBVOSX: ",e.getIsEntered() );
+//			Log.d("VALUE OF THE CHECKBVOSX: ",e.getIsEntered() );
 			if(e.getIsEntered().equalsIgnoreCase("true")){
 				image.setImageResource(R.drawable.entered_status_yes);
 			}else image.setImageResource(R.drawable.entered_status_no);

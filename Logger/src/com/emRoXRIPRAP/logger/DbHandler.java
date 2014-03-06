@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.emRoXRIPRAP.logger.DBContract.DataEntry;
 
-public class DbHandler extends SQLiteOpenHelper {
+public class DbHandler extends SQLiteOpenHelper implements Constants{
 
 
 	public DbHandler(Context context) {
@@ -128,10 +128,8 @@ public class DbHandler extends SQLiteOpenHelper {
 		    // looping through all rows and adding to list
 		    if (cursor.moveToFirst()) {
 		        do {
-String lId = cursor.getString(cursor.getColumnIndex(DataEntry.COLUMN_NAME_ENTRY_ID));
-Log.d("LOG LOG LOG lId Value STRINGVALUE: ","" + lId);
-int i = Integer.parseInt(lId);
-
+		        	String lId = cursor.getString(cursor.getColumnIndex(DataEntry.COLUMN_NAME_ENTRY_ID));
+		        	int i = Integer.parseInt(lId);
 		            Entry entry = new Entry();
 		            entry.setId(i);
 		            entry.setDate(cursor.getString(cursor.getColumnIndexOrThrow(DataEntry.COLUMN_NAME_DATE)));
