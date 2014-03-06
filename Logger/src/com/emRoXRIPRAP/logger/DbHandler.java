@@ -50,6 +50,7 @@ public class DbHandler extends SQLiteOpenHelper implements Constants{
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_COST, entry.getMaterialCost());
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_MARKUP, entry.getMaterialMarkup());
 		values.put(DataEntry.COLUMN_NAME_TOTAL, entry.getTotal());
+		values.put(DataEntry.COLUMN_NAME_WORK, entry.getWork());
 		
 		long finished =db.insert(DataEntry.TABLE_NAME, null, values);
 		db.close();
@@ -70,7 +71,8 @@ public class DbHandler extends SQLiteOpenHelper implements Constants{
 																	DataEntry.COLUMN_NAME_LABOR_RATE,
 																	DataEntry.COLUMN_NAME_MATERIAL_COST,
 																	DataEntry.COLUMN_NAME_MATERIAL_MARKUP,
-																	DataEntry.COLUMN_NAME_TOTAL
+																	DataEntry.COLUMN_NAME_TOTAL,
+																	DataEntry.COLUMN_NAME_WORK
 																	}, 
 																	DataEntry.COLUMN_NAME_ENTRY_ID + "=?",
 																	new String[] {String.valueOf(id) },
@@ -80,7 +82,7 @@ public class DbHandler extends SQLiteOpenHelper implements Constants{
 			cursor.moveToFirst();
 		}
 		Entry entry = new Entry(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
-								cursor.getString(6),cursor.getString(7),cursor.getString(8));
+								cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9));
 		entry.setId(cursor.getInt(0));
 		return entry;
 	}
@@ -96,7 +98,8 @@ public class DbHandler extends SQLiteOpenHelper implements Constants{
 																	DataEntry.COLUMN_NAME_MATERIAL_COST,
 																	DataEntry.COLUMN_NAME_MATERIAL_MARKUP,
 																	DataEntry.COLUMN_NAME_TOTAL,
-																	DataEntry.COLUMN_NAME_ENTRY_ID
+																	DataEntry.COLUMN_NAME_ENTRY_ID,
+																	DataEntry.COLUMN_NAME_WORK
 																	}, 
 																	DataEntry.COLUMN_NAME_DATE + "=?",
 																	new String[] {String.valueOf(date) },
@@ -106,7 +109,7 @@ public class DbHandler extends SQLiteOpenHelper implements Constants{
 		if(cursor.moveToFirst()){
 			do{
 				Entry entry = new Entry(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
-						cursor.getString(5),cursor.getString(6),cursor.getString(7));
+						cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(9));
 				entry.setId(cursor.getInt(8));
 				list.add(entry);
 			}while(cursor.moveToNext());
@@ -160,17 +163,19 @@ public class DbHandler extends SQLiteOpenHelper implements Constants{
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_COST, entry.getMaterialCost());
 		values.put(DataEntry.COLUMN_NAME_MATERIAL_MARKUP, entry.getMaterialMarkup());
 		values.put(DataEntry.COLUMN_NAME_TOTAL, entry.getTotal());
+		values.put(DataEntry.COLUMN_NAME_WORK, entry.getWork());
 		
 		//updating row
 		return db.update(DataEntry.TABLE_NAME, values, DataEntry.COLUMN_NAME_ENTRY_ID + " =?", new String[]{String.valueOf(entry.getId())});
 
 	}
 	
-	public void deleteEntry( Entry entry){
+	public int deleteEntry( Entry entry){
 		   SQLiteDatabase db = this.getWritableDatabase();
-		   db.delete(DataEntry.TABLE_NAME, DataEntry.COLUMN_NAME_ENTRY_ID + " = ?",
+		   int result = db.delete(DataEntry.TABLE_NAME, DataEntry.COLUMN_NAME_ENTRY_ID + " = ?",
 		            new String[] {String.valueOf(entry.getId()) });
 		   db.close();
+		   return result;
 	}
 	
 

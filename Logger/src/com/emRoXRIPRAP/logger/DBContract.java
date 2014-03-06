@@ -25,6 +25,7 @@ public final class DBContract implements Constants {
         public static final String COLUMN_NAME_MATERIAL_COST = "material_cost";
         public static final String COLUMN_NAME_MATERIAL_MARKUP = "material_markup";
         public static final String COLUMN_NAME_TOTAL = "total";
+        public static final String COLUMN_NAME_WORK = "work";
 
 		public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 								+ COLUMN_NAME_ENTRY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," 
@@ -35,7 +36,8 @@ public final class DBContract implements Constants {
                 								+ COLUMN_NAME_LABOR_RATE + " TEXT," 
                 								+ COLUMN_NAME_MATERIAL_COST + " TEXT,"
                 								+ COLUMN_NAME_MATERIAL_MARKUP + " TEXT," 
-                								+ COLUMN_NAME_TOTAL + " TEXT"
+                								+ COLUMN_NAME_TOTAL + " TEXT,"
+                								+ COLUMN_NAME_WORK + " TEXT"
                 								+ ")";
 	}
 

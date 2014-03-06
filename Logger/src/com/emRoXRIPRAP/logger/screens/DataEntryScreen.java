@@ -1,5 +1,8 @@
 package com.emRoXRIPRAP.logger.screens;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +13,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,12 +31,14 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 	private TextView date;
 	private TextView tvTotal;
 	private Button enterButton;
+	private Button deleteButton;
 	private CheckBox cbIsEntered;
-	private EditText etAddressMain;
+	private AutoCompleteTextView etAddressMain;
 	private EditText etHours;
 	private EditText etLaborRate;
 	private EditText etMaterialCost;
 	private EditText etMaterialMarkup;
+	private EditText etWork;
 	private Boolean isUpdate=false;
 	private Entry entryToUpdate;
 	private int id;
@@ -39,6 +46,7 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 	private boolean useMarkupRatePref;
 	private String laborRatePrefVal;
 	private String markupRatePrefVal;
+	DbHandler db = new DbHandler(this);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,13 +82,15 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 		date.setText(dateString);
 		isUpdate = intent.getBooleanExtra("update", false);
 		
-		etAddressMain = (EditText)findViewById(R.id.et_address_main);
+		etAddressMain = (AutoCompleteTextView)findViewById(R.id.et_address_main);
+		getAddressesForAutoCompleteField();
 		cbIsEntered = (CheckBox)findViewById(R.id.cb_entered_or_not);
 		etHours = (EditText)findViewById(R.id.et_hours);
 		etLaborRate = (EditText)findViewById(R.id.et_labor_rate);
 		etMaterialCost = (EditText)findViewById(R.id.et_material_cost);
 		etMaterialMarkup = (EditText)findViewById(R.id.et_material_markup);
 		tvTotal = (TextView)findViewById(R.id.tv_total);
+		etWork = (EditText)findViewById(R.id.et_description);
 		
 		etHours.setOnFocusChangeListener(this);
 		etLaborRate.setOnFocusChangeListener(this);
@@ -88,16 +98,33 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 		etMaterialMarkup.setOnFocusChangeListener(this);
 		
 		
-		
+		deleteButton = (Button)findViewById(R.id.b_delete_entry_from_db);
 		enterButton = (Button)findViewById(R.id.b_enter_data_to_db);
 		if(isUpdate){
-			DbHandler db = new DbHandler(this);
+			deleteButton.setVisibility(View.VISIBLE);
+			final DbHandler db = new DbHandler(this);
 			id =intent.getIntExtra("id", 0);
 			if(id != 0){
 				entryToUpdate =db.getEntry(id);
 			}
 			populateFieldsWithDbValues(entryToUpdate);
 			enterButton.setText("Update");
+			
+			deleteButton.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View arg0) {
+
+					int result = db.deleteEntry(entryToUpdate);
+					finish();
+					if(result == 1){
+						Toast.makeText(DataEntryScreen.this, "Entry deleted", Toast.LENGTH_LONG).show();
+					}else
+						Toast.makeText(DataEntryScreen.this, "Error deleting entry", Toast.LENGTH_LONG).show();
+						
+				}
+				
+			});
 		}else{
 			enterButton.setText("Enter");
 		}
@@ -116,7 +143,7 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 											etLaborRate.getText().toString(),
 											etMaterialCost.getText().toString(),
 											etMaterialMarkup.getText().toString(),
-											total);
+											total,etWork.getText().toString());
 					if(isUpdate){
 						entry.setId(id);
 						updateEntryInDb(entry);
@@ -132,6 +159,16 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 			
 		});
 	}
+	private void getAddressesForAutoCompleteField() {
+		List<Entry> completeList = db.getAllEntries();
+		List<String>addressList = new ArrayList<String>();		
+		for(Entry e: completeList){
+			String s = e.getAddressMain();
+			addressList.add(s);
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, addressList);
+		etAddressMain.setAdapter(adapter);
+	}
 	private void populateFieldsWithDbValues(Entry entry) {
 		etAddressMain.setText(entry.getAddressMain());
 		etHours.setText(entry.getLaborHours());
@@ -139,6 +176,7 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 		etMaterialCost.setText(entry.getMaterialCost());
 		etMaterialMarkup.setText(entry.getMaterialMarkup());
 		tvTotal.setText(entry.getTotal());
+		etWork.setText(entry.getWork());
 		if(entry.getIsEntered().equalsIgnoreCase("true")){
 			cbIsEntered.setChecked(true);
 		}else{
@@ -174,20 +212,13 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 	}
 	
 	private Boolean checkFields(){
-		Boolean check;
-		check = validateField(etAddressMain);
-		check = validateField(etHours);
-		check = validateField(etLaborRate);
-		check = validateField(etMaterialCost);
-		check = validateField(etMaterialMarkup);
 		
-		if(check) return true;
-		else{
+		if(validateField(etAddressMain) == false || validateField(etHours) == false || validateField(etLaborRate) == false || 
+		   validateField(etMaterialCost) == false || validateField(etMaterialMarkup) == false){
 			Toast.makeText(this, "Check Fields. One is empty dummy", Toast.LENGTH_LONG).show();
 			return false;
 		}
-		
-		
+		return true;
 	}
 	private Boolean validateField(EditText et){
 		if(et.getText().toString().trim().matches("")){
@@ -222,11 +253,11 @@ public class DataEntryScreen extends Activity implements OnFocusChangeListener,C
 		}
 	}
 	private void testModeQuickEntryOfFieldsIntoDataBase(DbHandler db) {
-		Entry one = new Entry("Wednesday 02-12-2014","true","123 Main Street","8.0","35","12.90",".15", "120.00");
-		Entry two = new Entry("Wednesday 02-12-2014","false","137 Ski Mobile","18.0","35","120.20",".15","120.00");
-		Entry thr = new Entry("Wednesday 02-12-2014","false","Settler's Green","5.5","35","87.25",".15","120.00");
-		Entry fou = new Entry("Saturday 04-12-2014","true","19 Prospect St","10.25","35","360.25",".10", "120.00");
-		Entry fiv = new Entry("Wednesday 02-19-2014","false","185 Pine Knoll Ter","8.0","35","12.90",".15", "120.00");
+		Entry one = new Entry("Wednesday 02-12-2014","true","123 Main Street","8.0","35","12.90",".15", "120.00","winterization");
+		Entry two = new Entry("Wednesday 02-12-2014","false","137 Ski Mobile","18.0","35","120.20",".15","120.00","anual ins");
+		Entry thr = new Entry("Wednesday 02-12-2014","false","Settler's Green","5.5","35","87.25",".15","120.00","plumbing");
+		Entry fou = new Entry("Saturday 04-12-2014","true","19 Prospect St","10.25","35","360.25",".10", "120.00","repair roof");
+		Entry fiv = new Entry("Wednesday 02-19-2014","false","185 Pine Knoll Ter","8.0","35","12.90",".15", "120.00","plowing");
 		db.addEntry(one);
 		db.addEntry(two);
 		db.addEntry(thr);

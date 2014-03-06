@@ -12,6 +12,7 @@ public class Entry {
 	private String materialCost;
 	private String materialMarkup;
 	private String total;
+	private String work;
 	private String isEntered;
 
 	//constructor
@@ -20,7 +21,7 @@ public class Entry {
 	}
 	//constructor
 	public Entry(String date, String isEntered, String addressMain, String laborHours, 
-					String laborRate, String materialCost, String materialMarkup,String total){
+					String laborRate, String materialCost, String materialMarkup,String total, String work){
 
 		this.date = date;
 		this.isEntered = isEntered;
@@ -30,6 +31,7 @@ public class Entry {
 		this.materialCost = materialCost;
 		this.materialMarkup = materialMarkup;
 		this.total = total;
+		this.work = work;
 		
 		return;
 		
@@ -61,6 +63,9 @@ public class Entry {
 	public String getTotal() {
 		return total;
 	}
+	public String getWork(){
+		return work;
+	}
 
 
 	public void setId(int l) {
@@ -89,6 +94,9 @@ public class Entry {
 	}
 	public void setTotal(String total) {
 		this.total = total;
+	}
+	public void setWork(String work){
+		this.work = work;
 	}
 
 
